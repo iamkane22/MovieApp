@@ -8,7 +8,17 @@
 import UIKit
 
 class HomeVC: BaseViewController {
-
+    private let viewModel: HomeViewModel
+    weak var coordinator: AppCoordinator?
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+        
 lazy var tableView: UITableView = {
         let tableView = UITableView()
     tableView.backgroundColor = .cyan
@@ -20,7 +30,7 @@ lazy var tableView: UITableView = {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        
+        viewModel.getMovieList()
     }
 
 

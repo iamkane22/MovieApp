@@ -1,12 +1,12 @@
 //
 //  CoreAPIHelper.swift
-//  CountryAppKenan
+//  URLSession
 //
-//  Created by Kenan on 14.12.24.
+//  Created by Aslanli Faqan on 22.11.24.
 //
-import Foundation
 
-public enum HttpMethods: String {
+import Foundation
+enum HttpMethods: String {
     case GET
     case POST
     case PATCH
@@ -14,69 +14,28 @@ public enum HttpMethods: String {
     case DELETE
 }
 
-enum BaseURL: String {
-    case json = "https://jsonplaceholder.typicode.com/"
-    case country = "https://restcountries.com/v3.1/"
-}
 
-enum endPoint {
-    case popular
-    case topRated
-    case upcoming
+enum BaseURL: String {
+    case tmdb = "https://api.themoviedb.org/3/"
 }
 
 final class CoreAPIHelper {
     static let instance = CoreAPIHelper()
     private init() {}
-    private let baseURL = BaseURL.country.rawValue
+    private let baseURL = BaseURL.tmdb.rawValue
     
     func makeURL(path: String) -> URL? {
         let urlString = baseURL + path
         return URL(string:urlString)
     }
     
+    enum EndPoint: String {
+        case popular = "movie/popular"
+        case topRated = "movie/top_rated"
+        case upcoming = "movie/upcoming"
+    }
+    
     func makeHeader() -> [String: String] {
-        return ["Authoration": "Barear Token"]
+        return ["Authoration": "Barear eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTY2MzU0ODBkMDNjNDExMzA2MzUwZDViZDM0YTdkYiIsIm5iZiI6MTczNDYzNzkzNy4zMTcsInN1YiI6IjY3NjQ3OTcxMjljODgyOTdhMTFmNjc3MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rl6HikoLc4mOcMFRmaGxqhvTyxLmLMZxPxFCae2hrNQ"]
     }
 }
-
-
-extension endPoint: endPointProtocol {
-    func movieAPIUrlString() -> String {
-        return "\(baseURL)\(genreURL)\(apiKey)"
-    }
-    
-    var baseURL: String {
-        return "https://api.themoviedb.org/3/movie/"
-    }
-    
-    var genreURL: String {
-        switch self {
-        case .popular:
-            "popular"
-        case .topRated:
-            "top_rated"
-        case .upcoming:
-            "upcoming"
-        }
-    }
-    
-    var apiKey: String {
-        "?api_key=3a6635480d03c411306350d5bd34a7db"
-    }
-    
-    var method: HttpMethods {
-        switch self {
-        case .popular:
-                .GET
-        case .topRated:
-                .GET
-        case .upcoming:
-                .GET
-        }
-    }
-    
-    
-}
-
-//https://api.themoviedb.org/3/movie/popular?api_key=3a6635480d03c411306350d5bd34a7db

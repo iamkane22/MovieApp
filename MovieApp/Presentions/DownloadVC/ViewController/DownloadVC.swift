@@ -8,6 +8,7 @@
 import UIKit
 
 class DownloadVC: UIViewController {
+    weak var coordinator: AppCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()

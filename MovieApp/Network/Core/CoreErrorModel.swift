@@ -1,9 +1,10 @@
 //
 //  CoreErrorModel.swift
-//  CountryAppKenan
+//  URLSession
 //
-//  Created by Kenan on 14.12.24.
+//  Created by Aslanli Faqan on 27.11.24.
 //
+
 import Foundation
 struct CoreErrorModel: Error, Decodable {
     let code: Int?
@@ -11,15 +12,14 @@ struct CoreErrorModel: Error, Decodable {
     
     
     static func authError(code: Int) -> CoreErrorModel {
-        return CoreErrorModel(code: code, message: "try again later")
+        return CoreErrorModel(code: code, message: "Zehmet olmasa yeniden login olun")
     }
     
     static func generalError() -> CoreErrorModel {
-        return CoreErrorModel(code: 500, message: "error")
+        return CoreErrorModel(code: 500, message: "Xeta bash verdi")
     }
 
     static func decodingError() -> CoreErrorModel {
         return CoreErrorModel(code: 0, message: "Can not parse json")
     }
 }
-

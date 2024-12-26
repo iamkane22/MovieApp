@@ -1,8 +1,8 @@
 //
 //  CoreAPIManager.swift
-//  CountryAppKenan
+//  URLSession
 //
-//  Created by Kenan on 14.12.24.
+//  Created by Aslanli Faqan on 22.11.24.
 //
 
 import Foundation
@@ -31,7 +31,7 @@ final class CoreAPIManager {
         }
         
         
-        let task = session.dataTask(with: url) { [weak self] data, response, error in
+        let task = session.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else {return}
             guard let response = response as? HTTPURLResponse else {return}
             if response.statusCode == 401 {

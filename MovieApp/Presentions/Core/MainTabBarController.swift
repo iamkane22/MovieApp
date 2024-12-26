@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController {
     }
     
 private func createTabBarItems() {
-    let homeViewController = UINavigationController(rootViewController: HomeVC())
+    let homeViewController = UINavigationController(rootViewController: HomeVC(viewModel: HomeViewModel()))
     let UpComingVC = UINavigationController(rootViewController: UpComingVC())
     let searchVC = UINavigationController(rootViewController: SearchVC())
     let downloadVC = UINavigationController(rootViewController: DownloadVC())
