@@ -22,7 +22,7 @@ final class CoreAPIManager {
         print("URL:", url)
         let session = URLSession.shared
         var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = header
+        request.allHTTPHeaderFields = CoreAPIHelper.instance.makeHeader()
         request.httpMethod = method.rawValue
         if !body.isEmpty {
             let bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
