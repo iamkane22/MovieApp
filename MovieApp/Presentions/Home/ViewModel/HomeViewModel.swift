@@ -8,7 +8,7 @@ final class HomeViewModel {
     enum ViewState {
         case loading
         case loaded
-        case success
+        case successTrand
         case error(String)
     }
     enum TimeInterval: String {
@@ -16,20 +16,33 @@ final class HomeViewModel {
         case week
     }
     private var trendingUse: TrendingUseCase
-    private var type: TimeInterval = .day
+    var type: TimeInterval = .day {
+        didSet {
+            getMovieList()
+        }
+    }
     private(set) var movieDTO: MovieDTO?
     var requestCallback: ((ViewState) -> Void)?
     init() {
         trendingUse = TrendingAPIService()
     }
-    func getMovieList() {
+    
+    func getTrandingCount() -> Int {
+        movieDTO?.results.count ?? 0
+    }
+    
+    func getTrandingMovie(index: Int) -> MovieResult? {
+        return movieDTO?.results[index]
+    }
+    
+    private func getMovieList() {
         requestCallback?(.loading)
         trendingUse.getTrendingMovie(time: type.rawValue) { [weak self] dto, error in
             guard let self = self else { return }
             requestCallback?(.loaded)
             if let dto = dto {
                 movieDTO = dto
-                requestCallback?(.success)
+                requestCallback?(.successTrand)
             } else if let error = error {
                 requestCallback?(.error(error))
             }
