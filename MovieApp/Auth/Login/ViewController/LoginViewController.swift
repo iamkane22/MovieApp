@@ -119,34 +119,44 @@ class LoginViewController: BaseViewController {
 
     @objc
     private func loginButtonClicked() {
-        guard let email = emailField.text, !email.isEmpty else {
-            showCustomAlert(title: "Error", message: "Please Fill Email ")
+        var isError = false
+
+        if let email = emailField.text, email.isEmpty {
+            emailField.setErrorBorder()
+            isError = true
+        } else {
+            emailField.clearErrorBorder()
+        }
+
+        if let password = passwordField.text, password.isEmpty {
+            passwordField.setErrorBorder()
+            isError = true
+        } else {
+            passwordField.clearErrorBorder()
+        }
+
+        if let email = emailField.text, !isValidEmail(email) {
+            emailField.setErrorBorder()
+            showCustomAlert(title: "Error", message: "Please enter a valid email")
+            return
+        } else {
+            emailField.clearErrorBorder()
+        }
+
+        if let password = passwordField.text, !isValidPassword(password) {
+            passwordField.setErrorBorder()
+            showCustomAlert(title: "Error", message: "Password must be at least 8 characters long and include: - Uppercase - Lowercase - Number - Special Character")
+            return
+        } else {
+            passwordField.clearErrorBorder()
+        }
+
+        if isError {
+            showCustomAlert(title: "Error", message: "Please fix the highlighted fields")
             return
         }
-        
-        guard let password = passwordField.text, !password.isEmpty else {
-            showCustomAlert(title: "Error", message: "Please Fill Password correct")
 
-            return
-        }
-        
-        guard isValidEmail(email) else {
-            showCustomAlert(title: "Error", message: "Please Fill Email correct")
-
-            return
-        }
-        
-        guard isValidPassword(password) else {
-            showCustomAlert(title: "Error", message: "Şifrə ən azı 8 simvol uzunluğunda olmalıdır və aşağıdakılardan ibarət olmalıdır: - Böyük hərf - Kiçik hərf - Rəqəm                             - Xüsusi simvol"
-
-                            
-                            
-
-                                                                )
-            return
-        }
-        
-        print("Doğrulama uğurludur!")
+        print("Validation successful!")
     }
 
 
@@ -155,9 +165,24 @@ class LoginViewController: BaseViewController {
         viewModel.showRegister()
     }
 }
-
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let _ = textField.text else { return }
+        guard let text = textField.text else { return }
+        
+        if textField == emailField {
+            if text.isEmpty || !isValidEmail(text) {
+                emailField.setErrorBorder()
+            } else {
+                emailField.clearErrorBorder()
+            }
+        }
+        
+        if textField == passwordField {
+            if text.isEmpty || !isValidPassword(text) {
+                passwordField.setErrorBorder()
+            } else {
+                passwordField.clearErrorBorder() 
+            }
+        }
     }
 }
