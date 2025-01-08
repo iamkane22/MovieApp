@@ -14,12 +14,18 @@ class AppCoordinator : Coordinator {
     
     var navigationController: UINavigationController
     
-    init(navigationController : UINavigationController) {
+    
+    var isLogin: Bool = false
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
-        setubTabBarController()
+        if isLogin {
+            Home()
+        } else {
+            showAuth()
+        }
     }
     
     private func setubTabBarController() {
@@ -52,4 +58,20 @@ class AppCoordinator : Coordinator {
         vc.coordinator = self
         navigationController.show(vc, sender: nil)
     }
+    
+        
+        
+    fileprivate func showAuth() {
+        children.removeAll()
+        let authCoordinator = AuthCordinator(navigationController: navigationController)
+        children.append(authCoordinator)
+        authCoordinator.parentCoordinator = self
+        authCoordinator.start()
+    }
+    
+//    func Auth() {
+//        let vc = AuthViewController(viewModel: AuthViewModel() )
+//        vc.coordinator = self
+//        navigationController.show(vc, sender: nil)
+//    }
 }

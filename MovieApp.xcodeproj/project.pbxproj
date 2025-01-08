@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E7DB9072D2E8DAE00510C3A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6E7DB9062D2E8DAE00510C3A /* FirebaseCore */; };
+		6E7DB9092D2E8DBC00510C3A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6E7DB9082D2E8DBC00510C3A /* FirebaseFirestore */; };
+		6E7DB90B2D2E8DC600510C3A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6E7DB90A2D2E8DC600510C3A /* FirebaseAuth */; };
 		6EC55CA32D16C2280037AF3F /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6EC55CA22D16C2280037AF3F /* SDWebImage */; };
 		6EC55CA52D16C2280037AF3F /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6EC55CA42D16C2280037AF3F /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
@@ -42,6 +45,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC55CA32D16C2280037AF3F /* SDWebImage in Frameworks */,
+				6E7DB90B2D2E8DC600510C3A /* FirebaseAuth in Frameworks */,
+				6E7DB9092D2E8DBC00510C3A /* FirebaseFirestore in Frameworks */,
+				6E7DB9072D2E8DAE00510C3A /* FirebaseCore in Frameworks */,
 				6EC55CA52D16C2280037AF3F /* SDWebImageMapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				6E09085A2D13923900175DDE /* MovieApp */,
+				6E7DB9052D2E8DAE00510C3A /* Frameworks */,
 				6E0908592D13923900175DDE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +70,13 @@
 				6E0908582D13923900175DDE /* MovieApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6E7DB9052D2E8DAE00510C3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +101,9 @@
 			packageProductDependencies = (
 				6EC55CA22D16C2280037AF3F /* SDWebImage */,
 				6EC55CA42D16C2280037AF3F /* SDWebImageMapKit */,
+				6E7DB9062D2E8DAE00510C3A /* FirebaseCore */,
+				6E7DB9082D2E8DBC00510C3A /* FirebaseFirestore */,
+				6E7DB90A2D2E8DC600510C3A /* FirebaseAuth */,
 			);
 			productName = MovieApp;
 			productReference = 6E0908582D13923900175DDE /* MovieApp.app */;
@@ -118,6 +135,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6EC55CA12D16C2270037AF3F /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				6E7DB8AB2D2E8D7E00510C3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6E0908592D13923900175DDE /* Products */;
@@ -345,6 +363,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6E7DB8AB2D2E8D7E00510C3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.6.0;
+			};
+		};
 		6EC55CA12D16C2270037AF3F /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
@@ -356,6 +382,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6E7DB9062D2E8DAE00510C3A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E7DB8AB2D2E8D7E00510C3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		6E7DB9082D2E8DBC00510C3A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E7DB8AB2D2E8D7E00510C3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		6E7DB90A2D2E8DC600510C3A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E7DB8AB2D2E8D7E00510C3A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		6EC55CA22D16C2280037AF3F /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6EC55CA12D16C2270037AF3F /* XCRemoteSwiftPackageReference "SDWebImage" */;

@@ -21,7 +21,7 @@ final class MovieCell: UICollectionViewCell {
     }
     
     private lazy var titleLabel = UILabel().withUsing {
-        $0.text = "Better Call Saul"
+        $0.text = "The wolf of wall street"
         $0.textColor = .label
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     }
