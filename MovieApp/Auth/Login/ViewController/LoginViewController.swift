@@ -56,33 +56,19 @@ class LoginViewController: BaseViewController {
         return stackView
     }()
 
-    private lazy var loginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(red: 0.1, green: 0.6, blue: 0.8, alpha: 1)
-        button.layer.cornerRadius = 8
-        button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4)
-        button.layer.shadowOpacity = 0.3
-        button.layer.shadowRadius = 4
-        button.anchorSize(.init(width: 0, height: 48))
-        return button
+    private lazy var loginButton: ReasubleButton = {
+        ReasubleButton(title: "Login", color: .blue, onAction: { [weak self] in
+            self?.loginButtonClicked()
+        })
     }()
 
-    private lazy var signUpButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Sign Up", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.setTitleColor(UIColor(red: 0.1, green: 0.6, blue: 0.8, alpha: 1), for: .normal)
-        button.backgroundColor = .clear
-        button.layer.cornerRadius = 8
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = UIColor(red: 0.1, green: 0.6, blue: 0.8, alpha: 1).cgColor
-        button.anchorSize(.init(width: 0, height: 48))
-        return button
+    private lazy var signUpButton: ReasubleButton = {
+        ReasubleButton(title: "Sign Up", color: .clear, onAction: { [weak self] in
+            self?.signUpButtonClicked()
+        })
     }()
+
+
 
     private lazy var buttonStack: UIStackView = {
         let stackView = UIStackView()

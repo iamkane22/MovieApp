@@ -1,21 +1,15 @@
-//
-//  Reasuble.swift
-//  MovieApp
-//
-//  Created by Kenan on 19.12.24.
-//
-
 import UIKit
-class ReasubleButton : UIButton {
+
+class ReasubleButton: UIButton {
     
-    private  var buttonImage: UIImage?
     var onAction: () -> Void
     
-    init(buttonImage: UIImage? = nil, onAction: @escaping () -> Void) {
-        self.buttonImage = buttonImage
+    init(title: String, color: UIColor, onAction: @escaping () -> Void) {
         self.onAction = onAction
         super.init(frame: .zero)
         
+        setTitle(title, for: .normal)
+        backgroundColor = color
         setupUI()
     }
     
@@ -23,20 +17,16 @@ class ReasubleButton : UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupUI() {
-        if let image = buttonImage {
-        setImage(image, for: .normal)
-        }
+    private func setupUI() {
         layer.borderWidth = 1
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = UIColor.blue.cgColor
         layer.cornerRadius = 10
-        tintColor = .white
+        setTitleColor(.white, for: .normal)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-
     }
     
-    @objc func buttonAction() {
+    @objc private func buttonAction() {
         onAction()
     }
-    
 }
