@@ -13,7 +13,7 @@ final class TrendingAPIService: TrendingUseCase {
 
     func getTrendingMovie(time: String, completion: @escaping (MovieDTO?, String? ) -> Void) {
         apiService.request(type: MovieDTO.self, url: TrendingHelper.all(time).endPoint, method: .GET) { [weak self] result in
-            guard let self = self else { return }
+            guard let _ = self else { return }
             switch result {
             case .success(let data):
                 completion(data, nil)

@@ -1,5 +1,5 @@
 //
-//  Cordinator.swift
+//  Coordinator.swift
 //  MovieApp
 //
 //  Created by Kenan on 21.12.24.
@@ -18,7 +18,6 @@ protocol Coordinator : AnyObject {
 
 extension Coordinator {
     
-   
     func childDidFinish(_ coordinator : Coordinator){
         // Call this if a coordinator is done.
         for (index, child) in children.enumerated() {
@@ -27,5 +26,9 @@ extension Coordinator {
                 break
             }
         }
+    }
+    
+    func showController(vc: UIViewController) {
+        navigationController.show(vc, sender: nil)
     }
 }

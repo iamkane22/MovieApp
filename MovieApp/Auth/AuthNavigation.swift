@@ -7,7 +7,7 @@
 import Foundation
 
 protocol AuthNavigation: AnyObject {
-func showRegister()
-func showLogin()
+    func showRegister()
+    func showLogin()
 }
 

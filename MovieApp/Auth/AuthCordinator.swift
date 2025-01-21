@@ -20,19 +20,19 @@ final class AuthCordinator: Coordinator {
     
     func start() {
         let controller = LoginViewController(viewModel: .init(navigation: self))
-        navigationController.show(controller, sender: nil)
+        showController(vc: controller)
     }
 }
 
 extension AuthCordinator: AuthNavigation {
+    
     func showLogin() {
         let controller = LoginViewController(viewModel: .init(navigation: self))
-        navigationController.show(controller, sender: nil)
+        showController(vc: controller)
     }
     
     func showRegister() {
-        let controller = RegisterViewController()
-        navigationController.show(controller, sender: nil)    }
-    
-    
+        let controller = RegisterViewController(viewmodel: .init(navigation: self))
+        showController(vc: controller)
+    }
 }

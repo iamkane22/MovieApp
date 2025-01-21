@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class LoginViewController: BaseViewController {
     private var viewModel: LoginViewModel
     init(viewModel: LoginViewModel) {
@@ -63,12 +62,12 @@ class LoginViewController: BaseViewController {
     }()
 
     private lazy var signUpButton: ReasubleButton = {
-        ReasubleButton(title: "Sign Up", color: .clear, onAction: { [weak self] in
-            self?.signUpButtonClicked()
-        })
+        let button = ReasubleButton(title: "Sign up", color: .blue, onAction: signUpButtonClicked)
+//        ReasubleButton(title: "Sign Up", color: .clear, onAction: { [weak self] in
+//            self?.signUpButtonClicked()
+//        })
+        return button
     }()
-
-
 
     private lazy var buttonStack: UIStackView = {
         let stackView = UIStackView()
@@ -121,21 +120,21 @@ class LoginViewController: BaseViewController {
     private func loginButtonClicked() {
         var isError = false
 
-        if let email = emailField.text, email.isEmpty {
+        guard let email = emailField.text, !email.isEmpty else {
             emailField.setErrorBorder()
             isError = true
-        } else {
-            emailField.clearErrorBorder()
+            showCustomAlert(title: "Error", message: "Email cannot be empty")
+            return
         }
 
-        if let password = passwordField.text, password.isEmpty {
+        guard let password = passwordField.text, !password.isEmpty else {
             passwordField.setErrorBorder()
             isError = true
-        } else {
-            passwordField.clearErrorBorder()
+            showCustomAlert(title: "Error", message: "Password cannot be empty")
+            return
         }
 
-        if let email = emailField.text, !isValidEmail(email) {
+        if !isValidEmail(email) {
             emailField.setErrorBorder()
             showCustomAlert(title: "Error", message: "Please enter a valid email")
             return
@@ -143,7 +142,7 @@ class LoginViewController: BaseViewController {
             emailField.clearErrorBorder()
         }
 
-        if let password = passwordField.text, !isValidPassword(password) {
+        if !isValidPassword(password) {
             passwordField.setErrorBorder()
             showCustomAlert(title: "Error", message: "Password must be at least 8 characters long and include: - Uppercase - Lowercase - Number - Special Character")
             return
@@ -151,20 +150,26 @@ class LoginViewController: BaseViewController {
             passwordField.clearErrorBorder()
         }
 
-        if isError {
-            showCustomAlert(title: "Error", message: "Please fix the highlighted fields")
-            return
+        FirebaseAuthService.shared.loginUser(email: email, password: password) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    print("Giriş uğurlu: \(user.email ?? "")")
+                    self?.showCustomAlert(title: "Success", message: "Giriş tamamlandı!")
+                case .failure(let error):
+                    print("Giriş xətası: \(error.localizedDescription)")
+                    self?.showCustomAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
         }
-
-        print("Validation successful!")
     }
-
 
     @objc
     private func signUpButtonClicked() {
         viewModel.showRegister()
     }
 }
+
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
@@ -181,7 +186,7 @@ extension LoginViewController: UITextFieldDelegate {
             if text.isEmpty || !isValidPassword(text) {
                 passwordField.setErrorBorder()
             } else {
-                passwordField.clearErrorBorder() 
+                passwordField.clearErrorBorder()
             }
         }
     }

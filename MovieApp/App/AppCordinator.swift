@@ -68,10 +68,4 @@ class AppCoordinator : Coordinator {
         authCoordinator.parentCoordinator = self
         authCoordinator.start()
     }
-    
-//    func Auth() {
-//        let vc = AuthViewController(viewModel: AuthViewModel() )
-//        vc.coordinator = self
-//        navigationController.show(vc, sender: nil)
-//    }
 }

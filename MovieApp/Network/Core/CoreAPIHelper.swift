@@ -29,11 +29,11 @@ final class CoreAPIHelper {
         return URL(string:urlString)
     }
     
-    enum EndPoint: String {
-        case popular = "movie/popular"
-        case topRated = "movie/top_rated"
-        case upcoming = "movie/upcoming"
-    }
+//    enum EndPoint: String {
+//        case popular = "movie/popular"
+//        case topRated = "movie/top_rated"
+//        case upcoming = "movie/upcoming"
+//    }
     
     func makeHeader() -> [String: String] {
         return [ "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTY2MzU0ODBkMDNjNDExMzA2MzUwZDViZDM0YTdkYiIsIm5iZiI6MTczNDYzNzkzNy4zMTcsInN1YiI6IjY3NjQ3OTcxMjljODgyOTdhMTFmNjc3MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Rl6HikoLc4mOcMFRmaGxqhvTyxLmLMZxPxFCae2hrNQ"]
